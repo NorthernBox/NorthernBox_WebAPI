@@ -2,13 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class MembersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private mailService: MailService,
+  ) {}
 
-  create(createMemberDto: CreateMemberDto) {
-    return this.prisma.mentees.create({ data: createMemberDto });
+  async create(createMemberDto: CreateMemberDto) {
+    try {
+      await this.mailService.sendMenteeRegistrationConfirmation(
+        createMemberDto,
+      );
+      return this.prisma.mentees.create({ data: createMemberDto });
+    } catch (error) {
+      throw new Error('Failed to create mentee or send email' + error);
+    }
   }
 
   findAll() {
@@ -24,6 +35,6 @@ export class MembersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} member`;
+    return this.prisma.mentees.delete({ where: { id } });
   }
 }
