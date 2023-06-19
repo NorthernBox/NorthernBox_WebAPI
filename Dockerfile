@@ -25,7 +25,7 @@ COPY . .
 RUN yarn build
 
 # Set environment variables
-ENV PORT=8000
+ENV PORT=3000
 ENV NODE_ENV=production
 
 # Expose the port on which the app will run

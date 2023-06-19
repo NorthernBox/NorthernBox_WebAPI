@@ -1,20 +1,34 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
-import { CreateMemberDto } from 'src/members/dto/create-member.dto';
+import { CreateMemberDto } from '../members/dto/create-member.dto';
+import { CreateMenteeDto } from '../mentees/dto/create-mentee.dto';
 
 @Injectable()
 export class MailService {
   constructor(private mailerService: MailerService) {}
 
-  async sendMenteeRegistrationConfirmation(createMemberDto: CreateMemberDto) {
+  async sendMenteeRegistrationConfirmation(createMenteeDto: CreateMenteeDto) {
+    // const url = `example.com/auth/confirm?token=${token}`;
+
+    await this.mailerService.sendMail({
+      to: createMenteeDto.email,
+      subject: 'Welcome',
+      template: './confirmation',
+      context: {
+        name: createMenteeDto.fullname,
+      },
+    });
+  }
+
+  async sendMemberRegistration(createMemberDto: CreateMemberDto) {
     // const url = `example.com/auth/confirm?token=${token}`;
 
     await this.mailerService.sendMail({
       to: createMemberDto.email,
-      subject: 'Welcome',
-      template: './confirmation',
+      subject: 'Welcome To NorthernBox',
+      template: './welcome',
       context: {
-        name: createMemberDto.fullname,
+        name: createMemberDto.firstname + ' ' + createMemberDto.lastname,
       },
     });
   }

@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
 }
 
 datasource db {
@@ -27,4 +28,27 @@ model Mentees {
   achivement_target String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Members {
+  id Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  email String @unique
+  phone String @unique
+  gender String
+  nationality String
+  based_location String
+  education_level String
+  field_of_study String[] 
+  employed_status Boolean @default(false)
+  job_title String?
+  skills String[]
+  interests String[]
+  joining_reason String
+  other_info String?
+  consent Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 }

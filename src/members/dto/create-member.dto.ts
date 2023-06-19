@@ -2,38 +2,35 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateMemberDto {
   @ApiProperty()
-  fullname: string;
-
+  firstname: string;
+  @ApiProperty()
+  lastname: string;
   @ApiProperty()
   email: string;
-
   @ApiProperty()
   phone: string;
-
   @ApiProperty()
-  location: string;
-
+  gender: string;
   @ApiProperty()
-  coding_experience: string;
-
+  nationality: string;
   @ApiProperty()
-  programming_languages: string[];
-
+  based_location: string;
   @ApiProperty()
-  projects: boolean;
-
+  education_level: string;
   @ApiProperty()
-  project_links: string;
-
+  field_of_study: string;
   @ApiProperty()
-  areas_of_interest: string[];
-
+  employed_status: boolean;
   @ApiProperty()
-  tech_framework_to_learn: string[];
-
+  job_title: string;
   @ApiProperty()
-  goals_objectives: string;
-
+  skills: string[];
   @ApiProperty()
-  achivement_target: string;
+  interests: string[];
+  @ApiProperty()
+  joining_reason: string;
+  @ApiProperty()
+  other_info: string;
+  @ApiProperty()
+  consent: boolean;
 }
