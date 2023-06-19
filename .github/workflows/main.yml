@@ -1,3 +1,25 @@
+# name: Deploy
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: akhileshns/heroku-deploy@v3.12.12
+#         with:
+#           heroku_api_key: 71c6b1f7-f61a-40c6-b826-f28540e116fa
+#           heroku_app_name: "northernboxwebapi"
+#           heroku_email: "northernboxcommunity@gmail.com"
+#           usedocker: true
+
+
+
+
 name: Deploy
 
 on:
@@ -8,11 +30,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          heroku_api_key: 71c6b1f7-f61a-40c6-b826-f28540e116fa
-          heroku_app_name: "northernboxwebapi"
-          heroku_email: "northernboxcommunity@gmail.com"
-          usedocker: true
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Docker image
+        run: docker build -t registry.heroku.com/<your-app-name>/web .
+
+      - name: Log in to Heroku container registry
+        run: echo "${{ secrets.HEROKU_API_KEY }}" | docker login --username=_ --password-stdin registry.heroku.com
+
+      - name: Push Docker image to Heroku
+        run: docker push registry.heroku.com/<your-app-name>/web
+
+      - name: Release to Heroku
+        run: heroku container:release web -a <your-app-name>
