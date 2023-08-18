@@ -12,10 +12,13 @@ export class MenteesService {
   ) {}
   async create(createMenteeDto: CreateMenteeDto) {
     try {
+      const result = await this.prisma.mentees.create({
+        data: createMenteeDto,
+      });
       await this.mailService.sendMenteeRegistrationConfirmation(
         createMenteeDto,
       );
-      return this.prisma.mentees.create({ data: createMenteeDto });
+      return result;
     } catch (error) {
       throw new Error('Failed to create mentee or send email' + error);
     }
