@@ -7,11 +7,12 @@ services:
     image: postgres:13.5
     restart: always
     environment:
-      - DATABASE_URL=postgresql://guyo:password@postgres:5432/northernbox_codewave
+      - POSTGRES_USER=guyo
+      - POSTGRES_PASSWORD=password
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5434:5432'
+      - '5432:5432'
 
 volumes:
-  postgres: 
+  postgres:
