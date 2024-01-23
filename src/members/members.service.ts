@@ -19,12 +19,13 @@ export class MembersService {
       await this.mailService.sendMemberRegistration(createMemberDto);
       return result;
     } catch (error) {
-      throw new Error('Failed to create mentee or send email' + error);
+      throw new Error('Failed to create member or send email' + error);
     }
   }
 
   findAll() {
-    return `This action returns all members`;
+    // return `This action returns all members`;
+    return this.prisma.members.findMany();
   }
 
   findOne(id: number) {
@@ -36,6 +37,10 @@ export class MembersService {
   }
 
   remove(id: number) {
-    return this.prisma.mentees.delete({ where: { id } });
+    return this.prisma.members.delete({ where: { id } });
+  }
+
+  removeAll() {
+    return this.prisma.members.deleteMany()
   }
 }

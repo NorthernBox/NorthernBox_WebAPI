@@ -18,7 +18,7 @@ export class CreateMemberDto {
   @ApiProperty()
   education_level: string;
   @ApiProperty()
-  field_of_study: string;
+  field_of_study: string[];
   @ApiProperty()
   employed_status: boolean;
   @ApiProperty()
