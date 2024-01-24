@@ -4,11 +4,11 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { MembersModule } from './members/members.module';
 import { MailModule } from './mail/mail.module';
-import { MenteesModule } from './mentees/mentees.module';
-import { DonationsModule } from './donations/donations.module';
+// import { MenteesModule } from './mentees/mentees.module';
+// import { DonationsModule } from './donations/donations.module';
 
 @Module({
-  imports: [PrismaModule, MembersModule, MailModule, MenteesModule, DonationsModule],
+  imports: [PrismaModule, MembersModule, MailModule,],
   controllers: [AppController],
   providers: [AppService],
 })

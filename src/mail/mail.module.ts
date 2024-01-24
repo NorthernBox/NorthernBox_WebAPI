@@ -12,12 +12,12 @@ import { join } from 'path';
         host: 'sbg108.truehost.cloud',
         secure: false,
         auth: {
-          user: 'codewave@northernbox.org',
-          pass: '6Jt4e4I6#b&X',
+          user: 'registrations@northernbox.org',
+          pass: 'fakepassword2',
         },
       },
       defaults: {
-        from: '"Code Wave"<codewave@northernbox.org>',
+        from: '"NorthernBox"<registrations@northernbox.org>',
       },
       template: {
         dir: join(__dirname, 'templates'),

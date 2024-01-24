@@ -43,4 +43,9 @@ export class MembersController {
   remove(@Param('id') id: string) {
     return this.membersService.remove(+id);
   }
+
+  @Delete()
+  removeAll(){
+    return this.membersService.removeAll()
+  }
 }
