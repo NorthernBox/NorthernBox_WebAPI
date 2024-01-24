@@ -26,7 +26,7 @@ export class MailService {
     await this.mailerService.sendMail({
       to: createMemberDto.email,
       subject: 'Welcome To NorthernBox',
-      template: 'membership',  // Update the template path
+      template: 'welcome',  // Update the template path
       context: {
         name: createMemberDto.firstname + ' ' + createMemberDto.lastname,
       },
