@@ -1,6 +1,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { CreateMemberDto } from '../members/dto/create-member.dto';
+import { CreateAmbassadorDto } from '../ambassadors/dto/create-ambassador.dto';
 // import { CreateMenteeDto } from '../mentees/dto/create-mentee.dto';
 
 @Injectable()
@@ -32,5 +33,18 @@ export class MailService {
       },
     });
 }
+
+  async sendAmbassadorReg(createAmbassadorDto: CreateAmbassadorDto) {
+    // const url = `example.com/auth/confirm?token=${token}`;
+
+    await this.mailerService.sendMail({
+      to: createAmbassadorDto.email,
+      subject: 'Welcome To NorthernBox',
+      template: 'ambassadorReg',  // Update the template path
+      context: {
+        name: createAmbassadorDto.fullname,
+      },
+    });
+  }
 
 }
