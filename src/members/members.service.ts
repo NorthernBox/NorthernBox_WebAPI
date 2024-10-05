@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { PrismaService } from '../prisma/prisma.service';
@@ -15,11 +15,12 @@ export class MembersService {
     try {
       const result = await this.prisma.members.create({
         data: createMemberDto,
-      });
-      await this.mailService.sendMemberRegistration(createMemberDto);
+      }).then(() => this.mailService.sendMemberRegistration(createMemberDto)).catch((err) =>{
+        throw new BadRequestException(err);
+      })
       return result;
     } catch (error) {
-      throw new Error('Failed to create member or send email' + error);
+      throw new BadRequestException('Failed to create member or send email' + error);
     }
   }
 

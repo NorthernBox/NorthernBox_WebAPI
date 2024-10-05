@@ -34,8 +34,8 @@ model Members {
   id Int @id @default(autoincrement())
   firstname String
   lastname String
-  email String
-  phone String
+  email String 
+  phone String 
   gender String
   nationality String
   based_location String
@@ -51,4 +51,26 @@ model Members {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // TODO: ADD SOME FIELDS HERE
+
+}
+
+model Ambassador {
+  id Int @id @default(autoincrement())
+  fullname String
+  email String  
+  phone String 
+  location String @default("")
+  age Int
+  gender String
+  education String
+  community_experience Boolean
+  role_community_experience String? @default("")
+  areas_of_expertise String[]
+  skills String[]
+  info_source String
+  consent Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // TODO: ADD SOME FIELDS HERE
 }
